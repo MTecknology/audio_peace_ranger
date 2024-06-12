@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Configuration &mdash; Audio Pattern Ranger 0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="How to Use APR" href="usage.html" />
+    <link rel="prev" title="Installation" href="install.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Audio Pattern Ranger
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">About APR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">How to Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Audio Pattern Ranger</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Configuration</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/intro/configure.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="configuration">
+<span id="id1"></span><h1>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline"></a></h1>
+<p>The sample configuration file shows all options and their default options.
+Start with a copy of this file and then modify it as needed.</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cp</span> <span class="n">example_config</span><span class="o">.</span><span class="n">yml</span> <span class="n">config</span><span class="o">.</span><span class="n">yml</span>
+<span class="n">sensible</span><span class="o">-</span><span class="n">editor</span> <span class="n">config</span><span class="o">.</span><span class="n">yml</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>The only value that <strong>must</strong> be set is the audio capture device. If the
+video capture device is set to <code class="docutils literal notranslate"><span class="pre">None</span></code>, only audio will be recorded.</p>
+<p><strong>Audio capture</strong> devices and their capabilities can be listed using:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ffmpeg</span> <span class="o">-</span><span class="n">loglevel</span> <span class="n">warning</span> <span class="o">-</span><span class="n">sources</span> <span class="n">alsa</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Sample Output:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Auto</span><span class="o">-</span><span class="n">detected</span> <span class="n">sources</span> <span class="k">for</span> <span class="n">alsa</span><span class="p">:</span>
+<span class="n">null</span> <span class="p">[</span><span class="n">Discard</span> <span class="nb">all</span> <span class="n">samples</span> <span class="p">(</span><span class="n">playback</span><span class="p">)</span> <span class="ow">or</span> <span class="n">generate</span> <span class="n">zero</span> <span class="n">samples</span> <span class="p">(</span><span class="n">capture</span><span class="p">)]</span>
+<span class="n">hw</span><span class="p">:</span><span class="n">CARD</span><span class="o">=</span><span class="n">Snowflake</span><span class="p">,</span><span class="n">DEV</span><span class="o">=</span><span class="mi">0</span> <span class="p">[</span><span class="n">Direct</span> <span class="n">hardware</span> <span class="n">device</span> <span class="n">without</span> <span class="nb">any</span> <span class="n">conversions</span><span class="p">]</span>
+<span class="n">plughw</span><span class="p">:</span><span class="n">CARD</span><span class="o">=</span><span class="n">Snowflake</span><span class="p">,</span><span class="n">DEV</span><span class="o">=</span><span class="mi">0</span> <span class="p">[</span><span class="n">Hardware</span> <span class="n">device</span> <span class="k">with</span> <span class="nb">all</span> <span class="n">software</span> <span class="n">conversions</span><span class="p">]</span>
+<span class="n">default</span><span class="p">:</span><span class="n">CARD</span><span class="o">=</span><span class="n">Snowflake</span> <span class="p">[</span><span class="n">Default</span> <span class="n">Audio</span> <span class="n">Device</span><span class="p">]</span>
+<span class="n">sysdefault</span><span class="p">:</span><span class="n">CARD</span><span class="o">=</span><span class="n">Snowflake</span> <span class="p">[</span><span class="n">Default</span> <span class="n">Audio</span> <span class="n">Device</span><span class="p">]</span>
+<span class="n">front</span><span class="p">:</span><span class="n">CARD</span><span class="o">=</span><span class="n">Snowflake</span><span class="p">,</span><span class="n">DEV</span><span class="o">=</span><span class="mi">0</span> <span class="p">[</span><span class="n">Front</span> <span class="n">output</span> <span class="o">/</span> <span class="nb">input</span><span class="p">]</span>
+<span class="n">dsnoop</span><span class="p">:</span><span class="n">CARD</span><span class="o">=</span><span class="n">Snowflake</span><span class="p">,</span><span class="n">DEV</span><span class="o">=</span><span class="mi">0</span> <span class="p">[</span><span class="n">Direct</span> <span class="n">sample</span> <span class="n">snooping</span> <span class="n">device</span><span class="p">]</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>In the above example, <code class="docutils literal notranslate"><span class="pre">hw:CARD=Snowflake,DEV=0</span></code> is one valid string that can
+be used for configuration.</p>
+<p><strong>Video capture</strong> devices and their capabilities can be listed using:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">v4l2</span><span class="o">-</span><span class="n">ctl</span> <span class="o">--</span><span class="nb">list</span><span class="o">-</span><span class="n">devices</span> <span class="o">--</span><span class="nb">all</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Sample Output:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Integrated</span> <span class="n">Camera</span><span class="p">:</span> <span class="n">Integrated</span> <span class="n">C</span> <span class="p">(</span><span class="n">usb</span><span class="o">-</span><span class="mi">0000</span><span class="p">:</span><span class="mi">64</span><span class="p">:</span><span class="mf">00.4</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">video0</span>
+        <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">video1</span>
+        <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">video2</span>
+        <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">media0</span>
+        <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">media1</span>
+
+<span class="n">Lenovo</span> <span class="mi">500</span> <span class="n">RGB</span> <span class="n">Camera</span><span class="p">:</span> <span class="n">Lenovo</span> <span class="mi">5</span> <span class="p">(</span><span class="n">usb</span><span class="o">-</span><span class="mi">0000</span><span class="p">:</span><span class="mi">01</span><span class="p">:</span><span class="mf">00.0</span><span class="o">-</span><span class="mf">1.2</span><span class="p">):</span>
+        <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">video3</span>
+        <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">video4</span>
+        <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">media2</span>
+
+<span class="p">[</span><span class="o">...</span><span class="p">]</span>
+
+<span class="n">Format</span> <span class="n">Video</span> <span class="n">Capture</span><span class="p">:</span>
+        <span class="n">Width</span><span class="o">/</span><span class="n">Height</span>      <span class="p">:</span> <span class="mi">1920</span><span class="o">/</span><span class="mi">1080</span>
+        <span class="n">Pixel</span> <span class="n">Format</span>      <span class="p">:</span> <span class="s1">&#39;MJPG&#39;</span> <span class="p">(</span><span class="n">Motion</span><span class="o">-</span><span class="n">JPEG</span><span class="p">)</span>
+        <span class="p">[</span><span class="o">...</span><span class="p">]</span>
+<span class="n">Streaming</span> <span class="n">Parameters</span> <span class="n">Video</span> <span class="n">Capture</span><span class="p">:</span>
+        <span class="n">Capabilities</span>     <span class="p">:</span> <span class="n">timeperframe</span>
+        <span class="n">Frames</span> <span class="n">per</span> <span class="n">second</span><span class="p">:</span> <span class="mf">5.000</span> <span class="p">(</span><span class="mi">5</span><span class="o">/</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="p">[</span><span class="o">...</span><span class="p">]</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>This sample output provided shows a webcam that can record at a maximum
+resolution of 1920x1080 at a framerate of 5. Note that only “video” devices
+should be used as a video capture device.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="install.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="usage.html" class="btn btn-neutral float-right" title="How to Use APR" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Michael Lustfield.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

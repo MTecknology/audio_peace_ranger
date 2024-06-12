@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Troubleshooting &mdash; Audio Pattern Ranger 0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="How to Use APR" href="usage.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Audio Pattern Ranger
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">About APR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configure.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">How to Use</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Troubleshooting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#inspect-ffmpeg">Inspect ffmpeg</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#python-debugger">Python Debugger</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Audio Pattern Ranger</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Troubleshooting</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/intro/troubleshooting.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="troubleshooting">
+<span id="id1"></span><h1>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline"></a></h1>
+<p>The first stop in any troubleshooting should always be to review logs. Whether
+you understand everything you read or barely a word, it will give you at least
+a few key words to start searching with.</p>
+<section id="inspect-ffmpeg">
+<h2>Inspect ffmpeg<a class="headerlink" href="#inspect-ffmpeg" title="Permalink to this headline"></a></h2>
+<p>With <code class="docutils literal notranslate"><span class="pre">loglevel</span></code> set to <code class="docutils literal notranslate"><span class="pre">DEBUG</span></code> in <code class="docutils literal notranslate"><span class="pre">config.yml</span></code>, the constructed ffmpeg
+will be logged, prefixed with: <code class="docutils literal notranslate"><span class="pre">Constructed</span> <span class="pre">ffmpeg</span> <span class="pre">command</span></code>:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">echo</span> <span class="s1">&#39;loglevel: DEBUG&#39;</span> <span class="o">&gt;&gt;</span><span class="n">config</span><span class="o">.</span><span class="n">yml</span>
+<span class="n">python3</span> <span class="o">-</span><span class="n">m</span> <span class="n">apr</span> <span class="o">-</span><span class="n">a</span> <span class="n">monitor</span>
+
+<span class="n">DEBUG</span><span class="p">:</span><span class="n">Constructed</span> <span class="n">ffmpeg</span> <span class="n">command</span><span class="p">:</span> <span class="n">ffmpeg</span> <span class="o">-</span><span class="n">y</span> <span class="o">-</span><span class="n">loglevel</span> <span class="n">error</span> <span class="o">-</span><span class="n">nostdin</span> <span class="o">-</span><span class="n">nostats</span> <span class="o">-</span><span class="n">f</span> <span class="n">v4l2</span> <span class="o">-</span><span class="n">video_size</span> <span class="mi">1920</span><span class="n">x1080</span> <span class="o">-</span><span class="n">framerate</span> <span class="mi">5</span> <span class="o">-</span><span class="n">thread_queue_size</span> <span class="mi">1024</span> <span class="o">-</span><span class="n">i</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">video0</span> <span class="o">-</span><span class="n">f</span> <span class="n">alsa</span> <span class="o">-</span><span class="n">thread_queue_size</span> <span class="mi">1024</span> <span class="o">-</span><span class="n">i</span> <span class="n">hw</span><span class="p">:</span><span class="n">CARD</span><span class="o">=</span><span class="n">Generic_1</span><span class="p">,</span><span class="n">DEV</span><span class="o">=</span><span class="mi">0</span> <span class="o">-</span><span class="n">vf</span> <span class="n">drawtext</span><span class="o">=</span><span class="n">fontfile</span><span class="o">=/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">fonts</span><span class="o">/</span><span class="n">truetype</span><span class="o">/</span><span class="n">freefont</span><span class="o">/</span><span class="n">FreeMonoBold</span><span class="o">.</span><span class="n">ttf</span><span class="p">:</span><span class="n">text</span><span class="o">=</span><span class="s2">&quot;%</span><span class="si">{localtime}</span><span class="s2">&quot;</span><span class="p">:</span><span class="n">fontcolor</span><span class="o">=</span><span class="n">red</span><span class="o">@</span><span class="mf">0.8</span><span class="p">:</span><span class="n">x</span><span class="o">=</span><span class="mi">7</span><span class="p">:</span><span class="n">y</span><span class="o">=</span><span class="mi">7</span> <span class="o">-</span><span class="n">preset</span> <span class="n">medium</span> <span class="o">-</span><span class="n">t</span> <span class="mi">00</span><span class="p">:</span><span class="mi">01</span><span class="p">:</span><span class="mi">30</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Simply copy/paste, add <code class="docutils literal notranslate"><span class="pre">filename.mkv</span></code> to the end.</p>
+</section>
+<section id="python-debugger">
+<h2>Python Debugger<a class="headerlink" href="#python-debugger" title="Permalink to this headline"></a></h2>
+<p>When threading is not a concern, pudb is the absolute best python debugger.</p>
+<p>Replace <code class="docutils literal notranslate"><span class="pre">python3</span></code> with <code class="docutils literal notranslate"><span class="pre">pudb3</span></code> to use:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pudb3</span> <span class="o">-</span><span class="n">m</span> <span class="n">apr</span> <span class="o">-</span><span class="n">a</span> <span class="n">monitor</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="usage.html" class="btn btn-neutral float-left" title="How to Use APR" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Michael Lustfield.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
